@@ -46,15 +46,20 @@ android {
         minSdk 19
         targetSdk 33
 
-        versionCode 41
-        versionName "4.1.1"
+        versionCode 1
+        versionName "0.0.0"
 
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
 
     signingConfigs {
-        release
+        release {
+            storeFile rootProject.file('app/release.jks')
+            storePassword System.getenv('STORE_PASSWORD')
+            keyAlias System.getenv('KEY_ALIAS')
+            keyPassword System.getenv('KEY_PASSWORD')
+        }
     }
 
     buildTypes {
@@ -62,17 +67,25 @@ android {
             minifyEnabled true
             shrinkResources true
             zipAlignEnabled true
-            signingConfig signingConfigs.release
+            if (rootProject.file('app/release.jks').exists()) {
+                signingConfig signingConfigs.release
+            }
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         nightly {
             initWith release
             applicationIdSuffix = ".nightly"
+            if (rootProject.file('app/release.jks').exists()) {
+                signingConfig signingConfigs.release
+            }
         }
 
         debug {
             applicationIdSuffix = ".debug"
+            if (rootProject.file('app/release.jks').exists()) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 
@@ -168,24 +181,4 @@ dependencies {
 
     //Love <3
     api "com.gitlab.AuroraOSS:gplayapi:0e224071f3"
-}
-
-Properties props = new Properties()
-def propFile = new File("signing.properties")
-if (propFile.canRead()) {
-    props.load(new FileInputStream(propFile))
-
-    if (props != null && props.containsKey("STORE_FILE") && props.containsKey("STORE_PASSWORD") &&
-            props.containsKey("KEY_ALIAS") && props.containsKey("KEY_PASSWORD")) {
-        android.signingConfigs.release.storeFile = file(props["STORE_FILE"])
-        android.signingConfigs.release.storePassword = props["STORE_PASSWORD"]
-        android.signingConfigs.release.keyAlias = props["KEY_ALIAS"]
-        android.signingConfigs.release.keyPassword = props["KEY_PASSWORD"]
-    } else {
-        println "signing.properties found but some entries are missing"
-        android.buildTypes.release.signingConfig = null
-    }
-} else {
-    println "signing.properties not found"
-    android.buildTypes.release.signingConfig = null
 }

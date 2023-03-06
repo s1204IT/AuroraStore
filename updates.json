@@ -1,7 +1,7 @@
 {
-  "version_name": "4.0.7",
-  "version_code": 38,
-  "aurora_build": "https://gitlab.com/AuroraOSS/AuroraStore/uploads/7b15e21f5b293a3db2c10e0ea7719f1a/AuroraStore_4.0.7.apk",
+  "version_name": "0.0.0",
+  "version_code": 1,
+  "aurora_build": "https://github.com/s1204IT/AuroraStore/releases/latest/download/AuroraStore.apk",
   "fdroid_build": "",
-  "changelog": "Changelog : v4.0.7\n • Fixed Aurora Services install issue\n • Updated Translations"
+  "changelog": "更新内容 : v0.0.0\n"
 }

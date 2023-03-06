@@ -34,22 +34,28 @@ jobs:
           key: ${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
 
       - name: Build with Gradle
-        run: | 
-          ./gradlew assemble
-          mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/app-debug-unsigned.apk
+        run: |
+          if [[ -n "${{ secrets.STORE_FILE }}" ]] && [[ -n "${{ secrets.STORE_PASSWORD }}" ]] && [[ -n "${{ secrets.KEY_ALIAS }}" ]] && [[ -n "${{ secrets.KEY_PASSWORD }}" ]]; then
+            echo "${{ secrets.STORE_FILE }}" | base64 -d > app/release.jks
+            export STORE_PASSWORD="${{ secrets.STORE_PASSWORD }}"
+            export KEY_ALIAS="${{ secrets.KEY_ALIAS }}"
+            export KEY_PASSWORD="${{ secrets.KEY_PASSWORD }}"
+          fi
+          ./gradlew assemble --warning-mode=all
           echo "version=$(grep versionName ./app/build.gradle | awk '{print $2}' | tr -d \")" >> $GITHUB_ENV
           echo "commit=$(echo ${{ github.sha }} | cut -c 1-7)" >> $GITHUB_ENV
 
       - name: Upload built APKs
         uses: actions/upload-artifact@v3
         with:
-          name: AuroraStore_${{ env.version }}@${{ env.commit }}
+          name: AuroraStore_v${{ env.version }}@${{ env.commit }}
           path: app/build/outputs/apk/**/*.apk
+          if-no-files-found: ignore
 
       - name: Release
         uses: softprops/action-gh-release@v1
         if: ${{ github.event.inputs.release == 'true' }}
         with:
-          tag_name: ${{ env.version }}
+          tag_name: v${{ env.version }}
           draft: true
           prerelease: false

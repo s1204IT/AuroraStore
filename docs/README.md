@@ -2,7 +2,7 @@
   <img src="https://www.gnu.org/graphics/gplv3-88x31.png" alt="GPL v3 Logo" />
 </div>
 <div align="center">
-  <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" title="AuroraStoreLogo" alt="AuroraStoreLogo" />
+  <img src="../app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" title="AuroraStoreLogo" alt="AuroraStoreLogo" />
 </div>
 
 # Aurora Store: A Google Playstore Client

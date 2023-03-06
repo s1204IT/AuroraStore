@@ -44,3 +44,4 @@ app/nightly/*
 #Exclude signing configurations & keystore
 signing.properties
 *.keystore
+*.jks
