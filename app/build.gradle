@@ -64,6 +64,7 @@ android {
 
     buildTypes {
         release {
+            // If true, cannot build.
             minifyEnabled false
             shrinkResources false
             zipAlignEnabled true
