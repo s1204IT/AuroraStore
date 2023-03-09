@@ -57,6 +57,10 @@
         android:name="android.hardware.gamepad"
         android:required="false"/>
 
+    <uses-feature
+        android:name="android.software.device_admin"
+        android:required="false"/>
+
     <application
         android:name=".AuroraApplication"
         android:allowBackup="true"
@@ -179,7 +183,7 @@
         </provider>
 
         <receiver
-            android:name=".data.receiver.AdminReceiver"
+            android:name="com.afwsamples.testdpc.DeviceAdminReceiver"
             android:exported="true"
             android:description="@string/app_name"
             android:label="@string/app_name"

@@ -40,8 +40,12 @@ jobs:
             export STORE_PASSWORD="${{ secrets.STORE_PASSWORD }}"
             export KEY_ALIAS="${{ secrets.KEY_ALIAS }}"
             export KEY_PASSWORD="${{ secrets.KEY_PASSWORD }}"
+          else
+            export STORE_PASSWORD="android"
+            export KEY_ALIAS="android"
+            export KEY_PASSWORD="android"
           fi
-          ./gradlew assemble --warning-mode=all
+          ./gradlew assemble
           echo "version=$(grep versionName ./app/build.gradle | awk '{print $2}' | tr -d \")" >> $GITHUB_ENV
           echo "commit=$(echo ${{ github.sha }} | cut -c 1-7)" >> $GITHUB_ENV
 
@@ -59,3 +63,4 @@ jobs:
           tag_name: v${{ env.version }}
           draft: true
           prerelease: false
+          files: app/build/outputs/apk/release/app-release.apk

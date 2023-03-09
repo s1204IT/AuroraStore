@@ -55,7 +55,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile rootProject.file('app/release.jks')
+            storeFile file('release.jks')
             storePassword System.getenv('STORE_PASSWORD')
             keyAlias System.getenv('KEY_ALIAS')
             keyPassword System.getenv('KEY_PASSWORD')
@@ -64,26 +64,17 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             zipAlignEnabled true
-            if (rootProject.file('app/release.jks').exists()) {
+            if (file('release.jks').exists()) {
                 signingConfig signingConfigs.release
             }
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
-        nightly {
-            initWith release
-            applicationIdSuffix = ".nightly"
-            if (rootProject.file('app/release.jks').exists()) {
-                signingConfig signingConfigs.release
-            }
-        }
-
         debug {
-            applicationIdSuffix = ".debug"
-            if (rootProject.file('app/release.jks').exists()) {
+            if (file('release.jks').exists()) {
                 signingConfig signingConfigs.release
             }
         }
