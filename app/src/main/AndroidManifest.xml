@@ -80,6 +80,7 @@
         android:required="false"/>
 
     <application
+        android:testOnly="true"
         android:name=".AuroraApplication"
         android:allowBackup="true"
         android:banner="@drawable/ic_tv_banner"
@@ -219,6 +220,7 @@
         <activity
               android:name="com.afwsamples.testdpc.PolicyManagementActivity"
               android:label="@string/testdpc"
+              android:icon="@drawable/ic_launcher"
               android:exported="true"
               android:windowSoftInputMode="adjustPan">
           <intent-filter>
@@ -239,6 +241,7 @@
                 android:name="com.afwsamples.testdpc.SetupManagementActivity"
                 android:theme="@style/SudThemeGlifV3.Light"
                 android:label="@string/setup_app_name"
+                android:icon="@drawable/ic_launcher"
                 android:taskAffinity="">
         </activity>
 
@@ -257,12 +260,14 @@
                 android:name="com.afwsamples.testdpc.AddAccountActivity"
                 android:exported="false"
                 android:label="@string/testdpc"
+                android:icon="@drawable/ic_launcher"
                 android:theme="@style/SudThemeGlifV3.Light"/>
 
         <activity
                 android:name="com.afwsamples.testdpc.FinalizeActivity"
                 android:exported="true"
                 android:label="@string/testdpc"
+                android:icon="@drawable/ic_launcher"
                 android:theme="@style/SudThemeGlifV3.Light"
                 android:permission="android.permission.BIND_DEVICE_ADMIN">
             <intent-filter>
@@ -275,12 +280,14 @@
                 android:name="com.afwsamples.testdpc.cosu.EnableCosuActivity"
                 android:exported="false"
                 android:label="@string/testdpc"
+                android:icon="@drawable/ic_launcher"
                 android:theme="@style/SudThemeGlifV3.Light"/>
 
         <activity
                 android:name="com.afwsamples.testdpc.policy.locktask.KioskModeActivity"
                 android:exported="true"
                 android:label="@string/kiosk_mode"
+                android:icon="@drawable/ic_launcher"
                 android:launchMode="singleInstance"
                 android:enabled="false">
             <intent-filter>
@@ -312,6 +319,7 @@
 
         <activity android:name="com.afwsamples.testdpc.WorkPolicyInfoActivity"
              android:label="@string/work_policy_info_name"
+             android:icon="@drawable/ic_launcher"
              android:exported="true"
              android:launchMode="singleTask">
             <intent-filter>
@@ -325,6 +333,7 @@
                 android:exported="true"
                 android:description="@string/testdpc"
                 android:label="@string/testdpc"
+                android:icon="@drawable/ic_launcher"
                 android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
                     android:name="android.app.device_admin"
